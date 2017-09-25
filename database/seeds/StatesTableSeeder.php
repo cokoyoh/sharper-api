@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 
 class StatesTableSeeder extends Seeder
 {
+    private $fields = ['completed','uncompleted'];
     /**
      * Run the database seeds.
      *
@@ -12,6 +13,11 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(State::class, 2)->create();
+        foreach ($this->fields as $field)
+        {
+            $role = State::create([
+                'status' => $field
+            ]);
+        }
     }
 }

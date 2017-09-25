@@ -81,4 +81,21 @@ class UserController extends Controller
         $users =  User::with('roles')->get();
         return response(['data' => $users],200);
     }
+
+    public function createUser()
+    {
+        $this->validate(request(),[
+            'name' => 'required',
+            'email' => 'unique:users',
+            'password' => 'required'
+        ]);
+
+        User::create([
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+        ]);
+
+        return response(['message' => 'User registered successfully!'],200);
+    }
 }
