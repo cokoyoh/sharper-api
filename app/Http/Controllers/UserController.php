@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $user = User::where('email', $request->input('email'))->first();
         if(!$user){
-            return response(['data' => 'Check if the email is correct!'],403);
+            return response(['message' => 'Check if the email is correct!'],403);
         }
 
         $token = Token::create([
