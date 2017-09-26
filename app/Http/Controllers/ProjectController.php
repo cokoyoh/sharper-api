@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,12 +49,14 @@ class ProjectController extends Controller
             'description' => 'required',
             'duration' => 'required'
         ]);
+        $user_name = request('user_name');
+        $user = User::where('name','=',$user_name)->first();
 
         Project::create([
             'title' => request('title'),
             'description' => request('description'),
             'duration' => request('duration'),
-            'user_id' => 1,
+            'user_id' => $user->id,
             'state_id' => 2
         ]);
 
