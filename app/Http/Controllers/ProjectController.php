@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
@@ -53,6 +54,7 @@ class ProjectController extends Controller
             'description' => request('description'),
             'duration' => request('duration'),
             'user_id' => 1,
+            'state_id' => 2
         ]);
 
         return response(['message' => 'Project created!'],200);

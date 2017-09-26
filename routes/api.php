@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('user', function (Request $request) {
     return $request->user()->with('roles')->first();
 });
 
@@ -27,15 +27,16 @@ Route::get('test', function(){
 });
 
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'] ,function (){
-    Route::get('user-list', 'UserController@getUserList')->name('user-list');
-
+    Route::post('user-list', 'UserController@getUserList');
+    Route::get('get-sharper-details','AdminController@getDetails');
+    Route::get('users-list','AdminController@getAllUsers');
+    Route::post('add-project', 'ProjectController@store');
 });
 
 Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
     Route::post('create-user','UserController@createUser');
     Route::get('projects-list', 'ProjectController@index');
     Route::get('project/{project}','ProjectController@show');
-    Route::post('add-project', 'ProjectController@store');
 });
 
 

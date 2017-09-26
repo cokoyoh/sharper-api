@@ -98,4 +98,5 @@ class UserController extends Controller
 
         return response(['message' => 'User registered successfully!'],200);
     }
+
 }
