@@ -33,7 +33,7 @@ class UserController extends Controller
 
         Mail::to($user)->send(new ForgotPassword($token, $request));
 
-        return response(['data' => 'Email has been sent. Please check your inbox'],200);
+        return response(['message' => 'Email has been sent. Please check your inbox'],200);
     }
 
 
@@ -64,7 +64,7 @@ class UserController extends Controller
                         ->first();
 
         if(!$db_token){
-            return response(['data' => 'Sorry, you cannot change the password!'],403);
+            return response(['message' => 'Sorry, you cannot change the password!'],403);
         }
 
         $user = User::where('id', $db_token->user_id)->first();
@@ -73,7 +73,7 @@ class UserController extends Controller
 
         DB::table('tokens')->where('id', $db_token->id)->delete();
 
-        return response(['data' => 'Password changed successfully'],200);
+        return response(['message' => 'Password changed successfully'],200);
     }
     
     public function getUserList()
