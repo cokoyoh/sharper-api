@@ -99,4 +99,10 @@ class UserController extends Controller
         return response(['message' => 'User registered successfully!'],200);
     }
 
+//    public function getUser(Request $request)
+//    {
+//        $user = $request->user();
+//        $user_id = (int)$user->id;
+//        $user_role = User::findOrFail($user_id)->roles;
+//    }
 }

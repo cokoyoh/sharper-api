@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -14,7 +15,8 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('user', function (Request $request) {
-    return $request->user()->with('roles')->first();
+    $user = $request->user()->with('roles')->where('email','=', $request->user()->email)->get();
+    return response(['data' => $user],200);
 });
 
 Route::get('test', function(){
