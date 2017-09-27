@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ForgotPassword;
+use App\Role;
 use App\Token;
 use App\User;
 use Carbon\Carbon;
@@ -90,19 +91,14 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'password' => bcrypt(request('password')),
         ]);
+        $roleId = Role::where('name', 'client')->first()->id;
+        $user->roles()->attach($roleId,['created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
 
         return response(['message' => 'User registered successfully!'],200);
     }
-
-//    public function getUser(Request $request)
-//    {
-//        $user = $request->user();
-//        $user_id = (int)$user->id;
-//        $user_role = User::findOrFail($user_id)->roles;
-//    }
 }
