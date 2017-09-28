@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ForgotPassword;
+use App\Project;
 use App\Role;
 use App\Token;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -86,9 +88,7 @@ class UserController extends Controller
     public function createUser()
     {
         $this->validate(request(),[
-            'name' => 'required',
             'email' => 'unique:users',
-            'password' => 'required'
         ]);
 
         $user = User::create([
@@ -100,5 +100,12 @@ class UserController extends Controller
         $user->roles()->attach($roleId,['created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
 
         return response(['message' => 'User registered successfully!'],200);
+    }
+
+    public function getUserProjects()
+    {
+        $user =  Auth::user();
+        $projects = Project::where('id','=',$user->id)->with('feedbacks')->get();
+        return response(['data' => $projects],200);
     }
 }

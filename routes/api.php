@@ -33,6 +33,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'] ,function (){
     Route::get('get-sharper-details','AdminController@getDetails');
     Route::get('users-list','AdminController@getAllUsers');
     Route::post('add-project', 'ProjectController@store');
+    Route::get('get-user-projects', 'UserController@getUserProjects');
+    Route::post('add-feedback','FeedbackController@addFeedback');
 });
 
 Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
