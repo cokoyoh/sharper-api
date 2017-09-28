@@ -15,6 +15,6 @@ class FeedbackController extends Controller
             'project_id' => request('project_id'),
             'user_id' => Auth::user()->id,
         ]);
-        return response(['message' => 'User feedback received'],200);
+        return response(['message' => 'User feedback received. Thank you'],200);
     }
 }
