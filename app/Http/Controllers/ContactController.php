@@ -10,9 +10,6 @@ class ContactController extends Controller
 {
     public function getMessage()
     {
-        $sender = request('email');
-        $receiver = 'info@sharper-innovations.co.ke';
-
         Mail::send('mails.contact-us',
             array(
                 'name' => request('full_name'),
@@ -27,6 +24,6 @@ class ContactController extends Controller
                 $message->to($receiver , 'Admin')->subject('Website Email');
             });
 
-        return response(['message' => 'Email sent successfully. Thank you.'],200);
+        return response(['message' => 'Message sent. Thank you.'],200);
     }
 }
