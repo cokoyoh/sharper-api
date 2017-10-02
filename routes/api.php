@@ -41,6 +41,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
     Route::post('create-user','UserController@createUser');
     Route::get('projects-list', 'ProjectController@index');
     Route::get('project/{project}','ProjectController@show');
+    Route::post('contact-us','ContactController@getMessage');
 });
 
 
