@@ -43,9 +43,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
     Route::get('project/{project}','ProjectController@show');
     Route::post('contact-us','ContactController@getMessage');
 });
-
-
-
 /**
  * Password reset routes
  */
